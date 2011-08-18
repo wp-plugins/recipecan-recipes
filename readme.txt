@@ -18,9 +18,9 @@ A Wordpress plugin that organizes recipes on for blog.
 
 == Screenshots ==
 
-1. /images/demo/list.png
-2. /images/demo/post.png
-3. /images/demo/edit.png
+1. Listing of Recipes
+2. Recipe Post
+3. Editing Recipe
 
 == Changelog ==
 
