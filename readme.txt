@@ -8,13 +8,14 @@ Stable tag: 0.1
 
 A Wordpress plugin that organizes recipes on your blog.
 
-This is the Wordpress plugin that we use to manage all of the recipes on the
-RecipeCan Blog.  It allows any Wordpress blogger to post, edit, and browse
-recipes and  photos.  The plugin is free and open source.
 
 == Description ==
 
 A Wordpress plugin that organizes recipes on for blog.
+
+This is the Wordpress plugin that we use to manage all of the recipes on the
+RecipeCan Blog.  It allows any Wordpress blogger to post, edit, and browse
+recipes and  photos.  The plugin is free and open source.
 
 == Screenshots ==
 
