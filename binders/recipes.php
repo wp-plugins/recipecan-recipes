@@ -4,6 +4,8 @@ require_once 'abstract.php';
 
 class RecipeCan_Binders_Recipes extends RecipeCan_Binders_Abstract {
 
+    private $_recipes;
+
     public function run() {
         //add_filter('single_template', array(&$this, 'template'));
         //add_filter('archive_template', array(&$this, 'archive'));
@@ -35,14 +37,53 @@ class RecipeCan_Binders_Recipes extends RecipeCan_Binders_Abstract {
     }
 
     public function list_recipes() {
-        $recipes = $this->make_recipes();
-        $this->view->set('recipes', $recipes->all());
-        return $this->view->read('recipes/index');
+
+        $this->_recipes = $this->make_recipes();
+        $to_display = array();
+
+        if ($this->request('search') != '') {
+            $to_display[] = $this->search();
+        } else {
+            $to_display[] = $this->recent();
+            $to_display[] = $this->most_viewed();
+        }
+
+        $this->view->set('recipes', $this->_recipes);
+        $this->view->set('page_name', $this->get_option('page_name'));
+        $this->view->set('to_display', $to_display);
+
+        return $this->view->render('recipes/index');
+    }
+
+    public function recent() {
+        return array(
+            'title' => 'Recent Recipes',
+            'recipes' => $this->_recipes->all(4)
+        );
+    }
+
+    public function most_viewed() {
+        return array(
+            'title' => 'Most Popular Recipes',
+            'recipes' => $this->_recipes->most_viewed()
+        );
+    }
+
+    public function search() {
+
+        $term = $this->request('search');
+
+        return array(
+            'title' => ucfirst($term) . " Recipes",
+            'recipes' => $this->_recipes->search($term)
+        );
     }
 
     public function insert($attrs) {
         $recipes = $this->make_recipes();
         $recipe = $recipes->find(array('id' => $attrs[1]));
+
+        $recipe->viewed();
 
         $this->view->set('recipe', $recipe);
         return $this->view->read('recipes/insert');
@@ -54,6 +95,8 @@ class RecipeCan_Binders_Recipes extends RecipeCan_Binders_Abstract {
         if (isset($post) && $post->post_type == $this->get_option('post_type_name')) {
             $recipes = $this->make_recipes();
             $recipe = $recipes->find(array('post_id' => $post->ID));
+
+            $recipe->viewed();
 
             $this->view->set('recipe', $recipe);
             return $this->view->render('recipes/page');

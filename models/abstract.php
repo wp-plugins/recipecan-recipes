@@ -38,7 +38,14 @@ class RecipeCan_Models_Abstract extends RecipeCan_Abstract {
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
 
-        $this->add_option($this->table_name() . '_table_version', $this->options['plugin_version']);
+        $option_name = $this->table_name() . '_table_version';
+        $option_value = $this->options['plugin_version'];
+
+        if ($this->get_option($option_name)) {
+            $this->update_option($option_name, $option_value);
+        } else {
+            $this->add_option($option_name, $option_value);
+        }
     }
 
     public function save($data, $where = array()) {
@@ -62,7 +69,7 @@ class RecipeCan_Models_Abstract extends RecipeCan_Abstract {
         $wpdb->insert($this->table_name(), $data);
     }
 
-    public function find($where) {
+    public function find($where, $other = array()) {
 
         if (count($where) == 0) {
             return null;
@@ -72,13 +79,13 @@ class RecipeCan_Models_Abstract extends RecipeCan_Abstract {
 
         $sql = array();
         foreach ($where as $column => $value) {
-            $sql[] = mysql_real_escape_string($column) . " = " . mysql_real_escape_string($value);
+            $sql[] = "`" . mysql_real_escape_string($column) . "` = '" . mysql_real_escape_string($value) . "'";
         }
-        $where_string = implode(", ", $sql);
+        $where_string = implode(" and ", $sql);
 
         $data = $wpdb->get_row(
                         $wpdb->prepare(
-                                "SELECT * FROM " . mysql_real_escape_string($this->table_name()) .
+                                "SELECT * FROM `" . mysql_real_escape_string($this->table_name()) . "`" .
                                 " WHERE " . $where_string
                         ), ARRAY_A
         );
@@ -94,19 +101,25 @@ class RecipeCan_Models_Abstract extends RecipeCan_Abstract {
         return $this->find(array('id' => $id));
     }
 
-    public function all_data() {
+    // make this more orm/oo 
+    public function all_data($limit = null) {
         global $wpdb;
+
+        $limit_string = "";
+        if ($limit != null) {
+            $limit_string = "limit " . mysql_real_escape_string((int) $limit);
+        }
+
         return $wpdb->get_results(
-                'select * from ' .
-                mysql_real_escape_string($this->table_name()) .
-                ' order by recipecan_id desc',
+                'select * from `' . mysql_real_escape_string($this->table_name()) . '`' .
+                ' order by recipecan_id desc ' . $limit_string,
                 ARRAY_A
         );
     }
 
-    public function all() {
+    public function all($limit = null) {
         $all = array();
-        foreach ($this->all_data() as $data) {
+        foreach ($this->all_data($limit) as $data) {
             $all[] = $this->make_row($data);
         }
         return $all;

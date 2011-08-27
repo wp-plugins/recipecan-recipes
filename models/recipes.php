@@ -24,6 +24,7 @@ class RecipeCan_Models_Recipes extends RecipeCan_Models_Abstract {
         'rating mediumint(9) not null',
         'slug varchar(255) not null',
         "likes mediumint(9) not null",
+        "wp_views mediumint(9) not null",
 
         "ingredients text not null",
         "directions text not null",
@@ -45,14 +46,68 @@ class RecipeCan_Models_Recipes extends RecipeCan_Models_Abstract {
         }
     }
 
+    public function courses() {
+        return array(
+            'Breakfast', 'Lunch', 'Snack', 'Appetizer', 
+            'Dinner', 'Side', 'Drink', 'Dessert'
+        );
+    }
+
+    public function search($term) {
+
+        global $wpdb;
+
+        if (trim($term) == "" || $term == null) {
+            return array();
+        }
+
+        // find tag, ingredient, direction, course, cuisine
+        $where = array(
+            'name', 'tag_list', 'ingredients', 'directions', 'course', 'cuisine'
+        );
+
+        $sql = array();
+        foreach ($where as $column) {
+            $sql[] = "`" . mysql_real_escape_string($column) . "` like '%%" . mysql_real_escape_string($term) . "%%'";
+        }
+        $where_string = implode(" or ", $sql);
+        
+        
+        $results = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM `" . mysql_real_escape_string($this->table_name()) . "`" .
+                " WHERE " . $where_string . " order by recipecan_id desc"
+            ), ARRAY_A
+        );
+
+
+        $all = array();
+        foreach ($results as $data) {
+            $all[] = $this->make_row($data);
+        }
+        return $all;
+    }
+
+    public function most_viewed() {
+        global $wpdb;
+
+        $results = $wpdb->get_results(
+                'select * from `' . mysql_real_escape_string($this->table_name()) . '`' .
+                ' order by wp_views desc limit 4',
+                ARRAY_A
+        );
+
+        $all = array();
+        foreach ($results as $data) {
+            $all[] = $this->make_row($data);
+        }
+        return $all;
+    }
+
     public function recipes() {
         return $this->all();
     }
 
-
-
-
-    
 
 }
 
