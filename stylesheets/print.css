@@ -1,0 +1,165 @@
+@media print {
+  body.recipecan_print_recipe_body_wrapper * {
+    background: none;
+    display: none; }
+  body.recipecan_print_recipe_body_wrapper #recipecan_print_area {
+    display: block; }
+    body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_title {
+      display: block;
+      padding: 0 0 10px 0; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_title h2 {
+        display: block;
+        font-size: 1.3em; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_title strong {
+        display: inline;
+        font-weight: normal; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_title ul {
+        display: block; }
+        body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_title ul li {
+          display: block;
+          padding: 0 0 5px 0; }
+    body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_tags {
+      display: block;
+      padding: 0 0 10px 0; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_tags h2 {
+        display: block;
+        font-size: 1.3em; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_tags strong {
+        display: inline;
+        font-weight: normal; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_tags ul {
+        display: block; }
+        body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_tags ul li {
+          display: block;
+          padding: 0 0 5px 0; }
+    body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_info {
+      display: block;
+      padding: 0 0 10px 0; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_info h2 {
+        display: block;
+        font-size: 1.3em; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_info strong {
+        display: inline;
+        font-weight: normal; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_info ul {
+        display: block; }
+        body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_info ul li {
+          display: block;
+          padding: 0 0 5px 0; }
+    body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container {
+      display: block; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients {
+        display: block;
+        padding: 0 0 10px 0; }
+        body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients h2 {
+          display: block;
+          font-size: 1.3em; }
+        body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients strong {
+          display: inline;
+          font-weight: normal; }
+        body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients ul {
+          display: block; }
+          body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients ul li {
+            display: block;
+            padding: 0 0 5px 0; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions {
+        display: block;
+        padding: 0 0 10px 0; }
+        body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions h2 {
+          display: block;
+          font-size: 1.3em; }
+        body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions strong {
+          display: inline;
+          font-weight: normal; }
+        body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions ul {
+          display: block; }
+          body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions ul li {
+            display: block;
+            padding: 0 0 5px 0; }
+      body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients strong, body.recipecan_print_recipe_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions strong {
+        font-size: 1.1em;
+        font-weight: bold; }
+
+  body.recipecan_print_ingredients_body_wrapper * {
+    background: none;
+    display: none; }
+  body.recipecan_print_ingredients_body_wrapper #recipecan_print_area {
+    display: block; }
+    body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_title {
+      display: block;
+      padding: 0 0 10px 0; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_title h2 {
+        display: block;
+        font-size: 1.3em; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_title strong {
+        display: inline;
+        font-weight: normal; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_title ul {
+        display: block; }
+        body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_title ul li {
+          display: block;
+          padding: 0 0 5px 0; }
+    body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_tags {
+      display: block;
+      padding: 0 0 10px 0; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_tags h2 {
+        display: block;
+        font-size: 1.3em; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_tags strong {
+        display: inline;
+        font-weight: normal; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_tags ul {
+        display: block; }
+        body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_tags ul li {
+          display: block;
+          padding: 0 0 5px 0; }
+    body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_info {
+      display: block;
+      padding: 0 0 10px 0; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_info h2 {
+        display: block;
+        font-size: 1.3em; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_info strong {
+        display: inline;
+        font-weight: normal; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_info ul {
+        display: block; }
+        body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_info ul li {
+          display: block;
+          padding: 0 0 5px 0; }
+    body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container {
+      display: block; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients {
+        display: block;
+        padding: 0 0 10px 0; }
+        body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients h2 {
+          display: block;
+          font-size: 1.3em; }
+        body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients strong {
+          display: inline;
+          font-weight: normal; }
+        body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients ul {
+          display: block; }
+          body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients ul li {
+            display: block;
+            padding: 0 0 5px 0; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions {
+        display: block;
+        padding: 0 0 10px 0; }
+        body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions h2 {
+          display: block;
+          font-size: 1.3em; }
+        body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions strong {
+          display: inline;
+          font-weight: normal; }
+        body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions ul {
+          display: block; }
+          body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions ul li {
+            display: block;
+            padding: 0 0 5px 0; }
+      body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_ingredients strong, body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions strong {
+        font-size: 1.1em;
+        font-weight: bold; }
+  body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_tags, body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_info,
+  body.recipecan_print_ingredients_body_wrapper #recipecan_print_area .recipecan_split_container .recipecan_directions {
+    display: none; } }
