@@ -7,8 +7,6 @@ class RecipeCan_Binders_Recipes extends RecipeCan_Binders_Abstract {
     private $_recipes;
 
     public function run() {
-        //add_filter('single_template', array(&$this, 'template'));
-        //add_filter('archive_template', array(&$this, 'archive'));
         add_shortcode('recipecan-list-recipes', array(&$this, 'list_recipes'));
         add_shortcode('recipecan-show-recipe', array(&$this, 'insert'));
         add_shortcode('your-recipe-will-show-here', array(&$this, 'insert'));
@@ -31,20 +29,6 @@ class RecipeCan_Binders_Recipes extends RecipeCan_Binders_Abstract {
         wp_enqueue_script('recipecan_print');
     }
 
-    public function template($single_template) {
-        global $post;
-
-        if ($post->post_type == $this->get_option('post_type_name')) {
-            $single_template = $this->options['path'] . '/templates/recipe-post-type-template.php';
-        }
-        //return $single_template;
-    }
-
-    public function archive($archive_template) {
-        global $post;
-        // for now lets redirect to the page
-    }
-
     public function list_recipes() {
 
         $this->_recipes = $this->make_recipes();
@@ -57,11 +41,27 @@ class RecipeCan_Binders_Recipes extends RecipeCan_Binders_Abstract {
             $to_display[] = $this->most_viewed();
         }
 
-        $this->view->set('recipes', $this->_recipes);
-        $this->view->set('page_name', $this->get_option('page_name'));
         $this->view->set('to_display', $to_display);
 
-        return $this->view->render('recipes/index');
+        $page_link = get_page_link($this->get_option('page_name'));
+        $this->view->set('page_link', $page_link);
+
+        // all
+        $all_link = add_query_arg('search', 'all', $page_link);
+        $this->view->set('all_link', $all_link);
+
+        // courses
+        $course_links = array();
+        foreach ($this->_recipes->courses() as $course) {
+            $course_links[] = array(
+                'name' => $course,
+                'link' => add_query_arg('search', strtolower($course), $page_link)
+            );
+        }
+
+        $this->view->set('courses', $course_links);
+
+        return $this->view->mustache('recipes/index');
     }
 
     public function recent() {
@@ -84,21 +84,31 @@ class RecipeCan_Binders_Recipes extends RecipeCan_Binders_Abstract {
 
         $term = $this->request('search');
 
-        return array(
-            'name' => 'search',
-            'title' => ucfirst($term) . " Recipes",
-            'recipes' => $this->_recipes->search($term)
-        );
+        if ($term == 'all') {
+            return array(
+                'name' => 'all',
+                'title' => 'All Recipes',
+                'recipes' => $this->_recipes->all()
+            );
+        } else {
+            return array(
+                'name' => 'search',
+                'title' => ucfirst($term) . " Recipes",
+                'recipes' => $this->_recipes->search($term)
+            );
+        }
     }
 
     public function insert($attrs) {
         $recipes = $this->make_recipes();
         $recipe = $recipes->find(array('id' => $attrs[1]));
 
-        $recipe->viewed();
+        if ($recipe) {
+            $recipe->viewed();
 
-        $this->view->set('recipe', $recipe);
-        return $this->view->read('recipes/insert');
+            $this->view->set('recipe', $recipe);
+            return $this->view->mustache('recipes/_recipe');
+        }
     }
 
     public function page($content) {
@@ -108,10 +118,12 @@ class RecipeCan_Binders_Recipes extends RecipeCan_Binders_Abstract {
             $recipes = $this->make_recipes();
             $recipe = $recipes->find(array('post_id' => $post->ID));
 
-            $recipe->viewed();
+            if ($recipe) {
+                $recipe->viewed();
 
-            $this->view->set('recipe', $recipe);
-            return $this->view->render('recipes/page');
+                $this->view->set('recipe', $recipe);
+                return $this->view->mustache('recipes/_recipe');
+            }
         } else {
             return $content;
         }
